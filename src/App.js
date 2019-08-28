@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import React, { useState } from 'react'; //Used for function based components
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 
@@ -49,15 +49,8 @@ class App extends Component {
   }
 
   render() {
-    const styleConst = {
-      backgroundColor: 'green',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     let persons = null;
+    let btnClasses = '';
 
     if (this.state.showPersons) {
 
@@ -74,14 +67,22 @@ class App extends Component {
 
         </div>
       );
-      styleConst.backgroundColor = 'red';
+      btnClasses = classes.Red;
+    }
+
+    const assignedClasses = [];
+    if(this.state.persons.length <= 2) {
+      assignedClasses.push( classes.red )
+    }
+    if(this.state.persons.length <= 1) {
+      assignedClasses.push( classes.bold )
     }
 
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I am React App</h1>
-          <p>This is really working!</p>
-          <button style={styleConst}
+          <p className={assignedClasses.join(' ')}>This is really working!</p>
+          <button className={btnClasses}
             onClick={this.togglePersonsHandler}>Toggle Person </button>
           {persons}
 
