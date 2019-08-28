@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import React, { useState } from 'react'; //Used for function based components
 import './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
 
 
 //Below commneted one is class based component example
@@ -55,11 +54,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     }
 
     let persons = null;
@@ -80,14 +75,9 @@ class App extends Component {
         </div>
       );
       styleConst.backgroundColor = 'red';
-      styleConst[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     return (
-      <StyleRoot>
         <div className="App">
           <h1>Hi, I am React App</h1>
           <p>This is really working!</p>
@@ -97,7 +87,6 @@ class App extends Component {
 
 
         </div>
-      </StyleRoot>
     );
     // return React.createElement('div', null, 'h1', 'Hi, I\'am React App!!!');
     //hi will be interpretet as text not element
@@ -107,7 +96,7 @@ class App extends Component {
 }
 
 // export default App;
-export default Radium(App);
+export default App;
 
 //Function based componet example
 /*const app = props => {
