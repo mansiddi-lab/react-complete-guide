@@ -4,6 +4,7 @@ import classes from './App.css';
 // import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass'
 
 
 //Below commneted one is class based component example
@@ -93,7 +94,7 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
 
         <button onClick={() => {
           this.setState({showCockpit: false});
@@ -105,7 +106,7 @@ class App extends Component {
           clicked={this.togglePersonsHandler} 
            /> : null }
         {persons}
-      </div>
+      </WithClass>
     );
     // return React.createElement('div', null, 'h1', 'Hi, I\'am React App!!!');
     //hi will be interpretet as text not element
