@@ -8,7 +8,6 @@ class Person extends Component {
         console.log('[Person.js] persons rendering');
         return (
             /*<div className={classes.Person} >*/
-            // <Aux>
             <Fragment>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
@@ -17,7 +16,6 @@ class Person extends Component {
                     value={this.props.name} />
 
             </Fragment>
-            // </Aux>
             /*</div>*/
         );
     }
