@@ -4,7 +4,8 @@ import classes from './App.css';
 // import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass'
+import withClass from '../hoc/withClass'
+import Aux from '../hoc/Auxilary';
 
 
 //Below commneted one is class based component example
@@ -21,7 +22,8 @@ class App extends Component {
       ],
       otherState: 'some other value',
       showPersons: false,
-      showCockpit: true
+      showCockpit: true,
+      changeCounter: 0
     }
   }
 
@@ -61,7 +63,16 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    // Not the best practice to update the state
+    // this.setState({ persons: persons });
+
+    //Best way to update state
+    this.setState((previousState, props) => {
+      return {
+      persons: persons, 
+      changeCounter: previousState.changeCounter + 1 
+      }
+    });
 
     // const person = Object.assign({}, this.state.persons[personIndex]); //this is the other way to do
   }
@@ -94,7 +105,7 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Aux>
 
         <button onClick={() => {
           this.setState({showCockpit: false});
@@ -106,7 +117,7 @@ class App extends Component {
           clicked={this.togglePersonsHandler} 
            /> : null }
         {persons}
-      </WithClass>
+      </Aux>
     );
     // return React.createElement('div', null, 'h1', 'Hi, I\'am React App!!!');
     //hi will be interpretet as text not element
@@ -115,4 +126,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
