@@ -45,6 +45,7 @@ const cockPit = (props) => {
             <p className={assignedClasses.join(' ')}>This is really working!</p>
             <button ref={toggleBtnRef} className={btnClasses}
                 onClick={props.clicked}>Toggle Person </button>
+                <button onClick={props.login}>Login</button>
         </div>
     )
 }

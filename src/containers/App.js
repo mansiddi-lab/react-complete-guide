@@ -23,7 +23,8 @@ class App extends Component {
       otherState: 'some other value',
       showPersons: false,
       showCockpit: true,
-      changeCounter: 0
+      changeCounter: 0,
+      authenticated: false
     }
   }
 
@@ -33,11 +34,11 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextstate) {
-        console.log('[App.js] shouldComponentUpdate');
-        return true;
-    }
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
 
-    componentDidUpdate() {
+  componentDidUpdate() {
     console.log('[App.js] componentDidUpdate');
   }
 
@@ -69,12 +70,16 @@ class App extends Component {
     //Best way to update state
     this.setState((previousState, props) => {
       return {
-      persons: persons, 
-      changeCounter: previousState.changeCounter + 1 
+        persons: persons,
+        changeCounter: previousState.changeCounter + 1
       }
     });
 
     // const person = Object.assign({}, this.state.persons[personIndex]); //this is the other way to do
+  }
+
+  loginHandler = () => {
+    this.setState({ authenticated: true });
   }
 
   togglePersonsHandler = () => {
@@ -100,7 +105,8 @@ class App extends Component {
         <Persons
           persons={this.state.persons}
           clicked={this.deletePersonhandler}
-          changed={this.nameChangedHandler} />
+          changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated} />
       );
     }
 
@@ -108,14 +114,15 @@ class App extends Component {
       <Aux>
 
         <button onClick={() => {
-          this.setState({showCockpit: false});
-          }}> Remove Cockpit</button>
-          {this.state.showCockpit ? 
-        <Cockpit title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler} 
-           /> : null }
+          this.setState({ showCockpit: false });
+        }}> Remove Cockpit</button>
+        {this.state.showCockpit ?
+          <Cockpit title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler}
+            login={this.loginHandler}
+          /> : null}
         {persons}
       </Aux>
     );
